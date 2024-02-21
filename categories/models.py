@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.db.models import Count
 
 class Category(models.Model):
-    """
-    Very basic structure. To be further built up.
-    """
-
     name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
+
+    @property
+    def count_products(self):
+        return self.products.count()
 
     def __str__(self):
         if self.is_active:
